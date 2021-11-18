@@ -20,4 +20,14 @@ class Event extends Model
     {
         return $this->hasOne(Price::class);
     }
+    public function booking()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    public function delete()
+    {
+        Booking::where('event_id',$this->id)->delete();
+        Price::where('event_id',$this->id)->delete();
+        return parent::delete();
+    }
 }

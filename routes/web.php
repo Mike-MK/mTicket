@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventsController;
+
 
 
 
@@ -18,9 +20,10 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
-    return view('home');
-});
+Route::get('/', [EventsController::class,'index'])->name('home');
+Route::get('/event/{id}/show',[EventsController::class,'show'])->name('show');
+Route::post('/event/{id}/book',[EventsController::class,'book'])->name('book');
+
 Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard')->middleware('role:admin');
 
 Route::get('/register',[RegisterController::class , 'index'])->name('register_page');
@@ -36,3 +39,11 @@ Route::get('/tickets', function () {
 });
 
 Route::post('/event',[DashboardController::class,'store'])->name('add_event');
+Route::get('/event/{id}/edit',[DashboardController::class,'edit'])->name('edit');
+Route::put('/event/{id}/edit',[DashboardController::class,'update'])->name('edit_event');
+Route::get('/event/{id}/delete',[DashboardController::class,'delete'])->name('delete_event');
+
+
+
+
+

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex justify-center">
-        <div class="w-1/2 md:w-8/12 bg-white p-6 rounded-lg">
+        <div class="w-1/2 md:w-4/12 bg-white p-6 rounded-lg">
             <form action="{{ route('login')}}" method="post">
                 @csrf
                 <div class="mb-4">
@@ -45,7 +45,7 @@
                 @endif
                 
                 <div class="flex justify-center mb-4">
-                    <button type="submit" class="bg-gradient-to-r from-red-500 to-yellow-300 text-white px-4 py-3 rounded font-medium w-full">LOGIN</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">LOGIN</button>
                 </div>
             </form>
         </div>

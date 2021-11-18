@@ -17,7 +17,7 @@ class Price extends Migration
             $table->id();
             $table->foreignId('event_id')->nullable()->constrained();
             $table->float('regular');
-            $table->float('vip');
+            $table->float('vip')->nullable();
             $table->timestamps();
         });
     }
