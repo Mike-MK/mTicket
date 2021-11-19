@@ -31,7 +31,12 @@
                         </div>
                         <div class="relative">
                             <label for="datetime" class="block text-sm font-medium text-gray-700">Date</label>
-                            <input id="datetime" name="datetime" type="datetime-local" class="bg-gray-50 z-9999 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block col-span-6 p-2.5" placeholder="Select date">
+                            <input id="datetime" name="datetime" value="{{date('Y-m-d\TH:i', strtotime($event->datetime))}}" type="datetime-local" class="bg-gray-50 z-9999 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block col-span-6 p-2.5 @error('datetime') border-red-500 @enderror" placeholder="Select date">
+                            @error('datetime')
+                                <div class="text-red-500 mt-2 text-sm">
+                                    {{$message}}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="block col-span-6 text-md font-medium text-gray-700">Price</div>

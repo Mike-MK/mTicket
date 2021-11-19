@@ -1,8 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('success'))
+    <div class="flex justify-center mb-4">
+        <div class="text-md py-4 px-2 bg-green-200 text-green-700 w-10/12 rounded-lg">
+            {{session('success')}}
+        </div>
+    </div>   
+    @endif
     <div class="flex justify-center">
-
+       
         <div class="w-10/12 bg-white p-6 rounded-lg flex flex-col">
             <div class="flex justify-between px-8 border-b pb-4">
                 <div class="flex text-center text-xl text-bold">Dashboard</div>
@@ -46,27 +53,27 @@
                                 <tbody class="bg-white divide-y divide-gray-300">
                                     
                                 @foreach ($events as $event)
-                                <tr class="text-center whitespace-nowrap">
-                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                <tr class="text-center whitespace-nowrap hover:bg-gray-100">
+                                    <td class="px-6 py-4 text-md text-gray-900">
                                         {{$event->id}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900">
+                                        <div class="text-md text-gray-900">
                                             {{$event->name}}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900">{{$event->venue}}</div>
+                                        <div class="text-md text-gray-900">{{$event->venue}}</div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                    <td class="px-6 py-4 text-md text-gray-900">
                                        {{$event->price->regular}}
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">
-                                        {{$event->datetime}}
+                                    <td class="px-6 py-4 text-md text-gray-900">
+                                        {{ date('jS F Y', strtotime($event->datetime)) }}
                                      </td>
                                     <td class="px-6 py-4">
                                         <a href='{{ route('edit',$event->id)}}' class="inline-block text-center" >
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400 hover:text-blue-800"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -75,7 +82,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <button data-modal-toggle="delete-modal"  type="button" class="inline-block text-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400 hover:text-red-800"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -167,7 +174,12 @@
                                     </div>
                                     <div class="relative">
                                         <label for="datetime" class="block text-sm font-medium text-gray-700">Date</label>
-                                        <input id="datetime" name="datetime" type="datetime-local" class="bg-gray-50 z-9999 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block col-span-6 p-2.5" placeholder="Select date">
+                                        <input id="datetime" name="datetime" value="{{date('Y-m-d\TH:i', strtotime(old('datetime')))}}" type="datetime-local" class="bg-gray-50 z-9999 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block col-span-6 p-2.5 @error('datetime') border-red-500 @enderror" placeholder="Select date">
+                                        @error('datetime')
+                                            <div class="text-red-500 mt-2 text-sm">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
 
                                     <div class="block col-span-6 text-md font-medium text-gray-700">Price</div>
