@@ -45,11 +45,11 @@ class EventsController extends Controller
 
 
         }
-        // Mail::send(['text'=>'mail'], ['name'=>auth()->user()->username], function($message) {
-        //         $message->to('michaelmukiri99@gmail.com', 'Tutorials Point')->subject
-        //             ('Ticket(s) booked successfully');
-        //         $message->from('mticket99@gmail.com','m Ticket');
-        //     });
+        Mail::send(['text'=>'mail'], ['name'=>auth()->user()->username], function($message) {
+                $message->to('michaelmukiri99@gmail.com', 'Tutorials Point')->subject
+                    ('Ticket(s) booked successfully');
+                $message->from('mticket99@gmail.com','m Ticket');
+            });
         return redirect()->route('home')->with('success','Ticket(s) booked successfully');
 
     }
