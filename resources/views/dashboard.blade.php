@@ -4,11 +4,11 @@
     <div class="flex justify-center">
 
         <div class="w-10/12 bg-white p-6 rounded-lg flex flex-col">
-            <div class="flex justify-between">
-                <div class="flex text-center">Dashboard</div>
-                <button class="p-4 bg-blue-500 h-6 flex items-center rounded-lg" data-modal-toggle="modal-add-item" >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <div class="flex justify-between px-8 border-b pb-4">
+                <div class="flex text-center text-xl text-bold">Dashboard</div>
+                <button class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-modal-toggle="modal-add-item" >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                       </svg>
                       <div class="text-white">Add Event</div>
                 </button>
@@ -18,24 +18,27 @@
                     <div class="w-full">
                         <div class="p-8">
                             <table class="divide-y divide-gray-300" id="dataTable">
-                                <thead class="bg-blue-500">
+                                <thead class="bg-blue-600">
                                     <tr>
-                                        <th class="px-6 py-2 text-xs text-white">
+                                        <th class="px-6 py-2 text-sm text-white">
                                             ID
                                         </th>
-                                        <th class="px-6 py-2 text-xs text-white">
+                                        <th class="px-6 py-2 text-sm text-white">
                                             Name
                                         </th>
-                                        <th class="px-6 py-2 text-xs text-white">
-                                            Email
+                                        <th class="px-6 py-2 text-sm text-white">
+                                            Venue
                                         </th>
-                                        <th class="px-6 py-2 text-xs text-white">
-                                            Created_at
+                                        <th class="px-6 py-2 text-sm text-white">
+                                            Regular
                                         </th>
-                                        <th class="px-6 py-2 text-xs text-white">
+                                        <th class="px-6 py-2 text-sm text-white">
+                                            Date
+                                        </th>
+                                        <th class="px-6 py-2 text-sm text-white">
                                             Edit
                                         </th>
-                                        <th class="px-6 py-2 text-xs text-white">
+                                        <th class="px-6 py-2 text-sm text-white">
                                             Delete
                                         </th>
                                     </tr>
@@ -44,7 +47,7 @@
                                     
                                 @foreach ($events as $event)
                                 <tr class="text-center whitespace-nowrap">
-                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                    <td class="px-6 py-4 text-sm text-gray-900">
                                         {{$event->id}}
                                     </td>
                                     <td class="px-6 py-4">
@@ -53,11 +56,14 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-500">{{$event->venue}}</div>
+                                        <div class="text-sm text-gray-900">{{$event->venue}}</div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                    <td class="px-6 py-4 text-sm text-gray-900">
                                        {{$event->price->regular}}
                                     </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                        {{$event->datetime}}
+                                     </td>
                                     <td class="px-6 py-4">
                                         <a href='{{ route('edit',$event->id)}}' class="inline-block text-center" >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400"
@@ -115,6 +121,7 @@
             </div>
         </div>        
     </div>
+    
     <div id="modal-add-item" aria-hidden="true" class="hidden overflow-x-hidden overflow-y-auto fixed h-modal top-4 left-0 right-0 z-50 justify-center items-center">
             <div class="relative w-full max-w-2xl px-4 h-full">
                 <!-- Modal content -->
@@ -159,10 +166,8 @@
                                         @enderror
                                     </div>
                                     <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                                        </div>
-                                        <input datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block col-span-6 pl-10 p-2.5" placeholder="Select date">
+                                        <label for="datetime" class="block text-sm font-medium text-gray-700">Date</label>
+                                        <input id="datetime" name="datetime" type="datetime-local" class="bg-gray-50 z-9999 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block col-span-6 p-2.5" placeholder="Select date">
                                     </div>
 
                                     <div class="block col-span-6 text-md font-medium text-gray-700">Price</div>
@@ -224,7 +229,19 @@
                 </div>
             </div>
     </div>
-      
+    @if (old('error_add_event'))
+        <script>
+            $(document).ready(function () {
+                toggleModal('modal-add-item',true);
+            });
+        </script>
+    @endif
     <script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+    
     
 @endsection

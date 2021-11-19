@@ -13,14 +13,13 @@
     <title>Document</title>
 </head>
 <body class="bg-gray-100 ">
-    <nav class="p-6 bg-white flex justify-between mb-6">
+    <nav class="p-6 bg-white flex justify-between mb-6 text-lg">
         <ul class="flex items-center">
-            <li><a href="" class="p-3">Home</a></li>
+            <li><a href="{{route('home')}}" class="p-3">Home</a></li>
             @can('isAdmin')
                 <li><a href="{{route('dashboard')}}" class="p-3">Dashboard</a></li>
             @endcan
             
-            <li><a href="{{route('home')}}" class="p-3">Tickets</a></li>
         </ul>
         <ul class="flex items-center">
             @if(auth()->user())

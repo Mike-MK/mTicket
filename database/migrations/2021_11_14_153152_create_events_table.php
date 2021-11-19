@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('venue');
+            $table->datetime('datetime');
             $table->integer('max_attendees');
             $table->integer('quantity_available'); 
         });

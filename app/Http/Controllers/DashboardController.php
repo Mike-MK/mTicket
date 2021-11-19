@@ -21,27 +21,25 @@ class DashboardController extends Controller
         $this->validate($request,[
             'name'=> 'required|max:255',
             'venue' => 'required|max:255',
+            'datetime' => 'required',
             'max_attendance' => 'required',
             'regular'=>'required',
         ]);
-        try{
-            $event = Event::create([
-                'name'=> $request->name,
-                'venue' => $request->venue,
-                'description' => $request->description,
-                'max_attendees' => $request->max_attendance,
-                'quantity_available' => $request->max_attendance,
-            ]);
-            $price = Price::create([
-                'event_id' => $event->id,     
-                'regular' => 2345,
-                'vip' => 5436,
-            ]);  
-        } catch (\Throwable $th) {
-            dd();
-            $th->getTraceAsString();
-            return redirect()->route('dashboard');
-        }
+    
+        $event = Event::create([
+            'name'=> $request->name,
+            'venue' => $request->venue,
+            'datetime' => $request->datetime,
+            'description' => $request->description,
+            'max_attendees' => $request->max_attendance,
+            'quantity_available' => $request->max_attendance,
+        ]);
+        $price = Price::create([
+            'event_id' => $event->id,     
+            'regular' => $request->regular,
+            'vip' => $request->vip,
+        ]);  
+        
         
         return redirect()->route('dashboard');
     }
@@ -51,6 +49,7 @@ class DashboardController extends Controller
         $this->validate($request,[
             'name'=> 'required|max:255',
             'venue' => 'required|max:255',
+            'datetime' => 'required',
             'max_attendance' => 'required',
             'regular'=>'required',
         ]);
@@ -61,6 +60,7 @@ class DashboardController extends Controller
         $event->price->regular = $request->regular;
         $event->price->vip = $request->vip;
         $event->description = $request->description;
+        $event->datetime = $request->datetime;
         $event->max_attendees = $request->max_attendance;
         $event->quantity_available = $request->max_attendance;
         $event->push();
@@ -75,12 +75,6 @@ class DashboardController extends Controller
     public function delete($id)
     {
         $event=Event::find($id)->delete();
-        // //$event->booking->delete();
-        // //dd($event->booking->delete);
-        // foreach ($event->booking as $booking){
-        //     $booking->delete();
-        // }
-        // dd($event->booking);
         return redirect()->route('dashboard')->with('success','Event updated succefully');
     }
 }

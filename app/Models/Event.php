@@ -13,6 +13,7 @@ class Event extends Model
         'name',
         'description',
         'venue',
+        'datetime',
         'max_attendees',
         'quantity_available',
     ];
@@ -24,10 +25,10 @@ class Event extends Model
     {
         return $this->hasMany(Booking::class);
     }
-    public function delete()
-    {
-        Booking::where('event_id',$this->id)->delete();
-        Price::where('event_id',$this->id)->delete();
-        return parent::delete();
-    }
+    // public function delete()
+    // {
+    //     Booking::where('event_id',$this->id)->delete();
+    //     Price::where('event_id',$this->id)->delete();
+    //     return parent::delete();
+    // }
 }

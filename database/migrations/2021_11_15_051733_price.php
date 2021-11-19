@@ -15,7 +15,7 @@ class Price extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_id')->nullable()->constrained();
+            $table->foreignId('event_id')->nullable()->constrained()->onDelete('cascade');
             $table->float('regular');
             $table->float('vip')->nullable();
             $table->timestamps();
