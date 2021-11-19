@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div id="ticket_error" aria-hidden="true" class="hidden p-4 bg-red-100 text-red-700 m-2 rounded-lg">You can only book a maximum of 5 tickets</div>
-                    <button id='submit' class="w-full h-12 bg-blue-500 text-white font-bold text-lg rounded-lg" type=submit>Book Tickets</button>
+                    <button id='submit' class="w-full h-12 bg-blue-700 hover:bg-blue-800 text-white font-bold text-lg rounded-lg" type=submit>Book Tickets</button>
                     
                 </form>
             </div>
@@ -60,11 +60,12 @@
         
       const submit = document.getElementById('book');
       submit.addEventListener("submit",validate)
+
       function validate(e){
-        
         let regular = document.getElementById("qty_regular").value;
         let vip = document.getElementById("qty_vip").value;
         let sum;
+        //limit tickets booked to 5
         if (!isNaN(vip) && !isNaN(regular)) {
             sum = parseInt(regular) + parseInt(vip);
             if(sum>5){
@@ -79,18 +80,13 @@
                 
             }
         }
+        if(isNaN(parseInt(vip)) && isNaN(parseInt(regular))){
+            //prevent submission if no input
+            e.preventDefault();
+            console.log("here we gooo");
+        }
         return true;
       
       }
     </script>
-    {{-- <script type="text/javascript">
-        $(document).ready(function(){
-            $('book').on("submit",function(){
-                console.log("Loading...");
-                if()
-                
-        });
-    });
-    </script> --}}
-
 @endsection
