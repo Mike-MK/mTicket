@@ -46,7 +46,7 @@ class EventsController extends Controller
 
         }
         Mail::send(['text'=>'mail'], ['name'=>auth()->user()->username], function($message) {
-                $message->to('michaelmukiri99@gmail.com', 'Tutorials Point')->subject
+                $message->to(auth()->user()->email, auth()->user()->username)->subject
                     ('Ticket(s) booked successfully');
                 $message->from('mticket99@gmail.com','m Ticket');
             });
