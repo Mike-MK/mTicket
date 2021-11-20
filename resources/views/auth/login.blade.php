@@ -4,6 +4,13 @@
     <div class="flex justify-center">
         <div class="w-8/12 md:w-4/12 bg-white p-6 rounded-lg">
             <div class="text-center text-2xl font-semibold mb-4 text-blue-900">mTicket</div>
+            @if (session('failure'))
+                <div class="flex justify-center rounded-lg mb-4">
+                    <div class="text-md py-4 px-2 bg-red-200 text-red-700 w-full">
+                        {{session('failure')}}
+                    </div>
+                </div>   
+            @endif
             <form action="{{ route('login')}}" method="post">
                 @csrf
                 <div class="mb-4">
