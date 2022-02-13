@@ -28,9 +28,9 @@
                             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                 @foreach ($events as $event)
                                 <div class="group relative p-2 rounded:lg hover:shadow ">
-                                    <div class="absolute ml-2 h-14 w-14 bg-blue-900 rounded-full shadow:xl float-top z-50">
-                                        <div class="text-white text-lg text-center font-semibold">{{ date('jS', strtotime($event->datetime)) }}</div>
-                                        <div class="text-white text-lg text-center font-semibold">{{ date('M', strtotime($event->datetime)) }}</div>
+                                    <div class="absolute ml-2 h-14 w-12 bg-blue-100 rounded-md shadow:xl float-top z-50">
+                                        <div class="text-blue-800 text-lg text-center font-semibold">{{ date('jS', strtotime($event->datetime)) }}</div>
+                                        <div class="text-blue-800 text-lg text-center font-semibold">{{ date('M', strtotime($event->datetime)) }}</div>
                                         
                                     </div>
                                     <div class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
