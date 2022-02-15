@@ -6,7 +6,7 @@
     <div class="w-10/12 bg-white p-6 rounded-lg flex flex-col">
         <div class="grid md:grid-cols-2 grid-cols-1">
             <div class="h-screen bg-gray-100 p-6 rounded-lg">
-                <img src="/img/churchill-2.jfif" alt="product image">
+                <img src="/img/event.jpg" class="object-fill" alt="product image">
             </div>
             <div class="p-6">
                 <div class="border-b">
